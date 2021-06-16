@@ -1,32 +1,21 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { APP_NAME } from "../../App";
+import { LINKS } from "./links";
 
-type Link = {
-  link: string,
-  label: string,
-};
-
-export function NavigationBar() {
-  const links: Link[] = [
-    { label: 'Home', link: '#home' },
-    { label: 'Link', link: '#link' },
-  ];
-
-  return (
-    <Navbar bg='success' variant='dark' expand='lg' className='shadow-sm border-bottom'>
-      <Navbar.Brand href={links[0].link}>{APP_NAME}</Navbar.Brand>
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className="mr-auto">
-            {links.map((link, index) => 
-              <Nav.Link key={index} href={link.link}>{link.label}</Nav.Link>
-            )}
-          </Nav>
-          <Nav>
-            <Nav.Link>Guest</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-    </Navbar>
-  );
-}
+export const NavigationBar = () => (
+  <Navbar bg='success' variant='dark' expand='lg' className='shadow-sm border-bottom'>
+    <Navbar.Brand href={LINKS[0].link}>{APP_NAME}</Navbar.Brand>
+    <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <Navbar.Collapse id='basic-navbar-nav'>
+        <Nav className="mr-auto">
+          {LINKS.map((link, key) => 
+            <Nav.Link key={key} href={link.link}>{link.label}</Nav.Link>
+          )}
+        </Nav>
+        <Nav>
+          <Nav.Link>Guest</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+  </Navbar>
+);
