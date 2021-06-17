@@ -27,7 +27,7 @@ const CAROUSEL_ITEMS: CarouselItem[] = [
 
 export const HomeIndex = () => (
   <div>
-    <Carousel fade>
+    <Carousel fade data-testid='carousel'>
       {CAROUSEL_ITEMS.map((item, key) => 
         <Carousel.Item key={key}>
           <img src={item.placeholder} className="d-block w-100" />
