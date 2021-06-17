@@ -5,5 +5,5 @@ export type Link = {
 
 export const LINKS: Link[] = [
   { label: 'Home', link: '/' },
-  { label: 'Cars', link: '/cars' },
+  { label: 'Spots', link: '/spots' },
 ];

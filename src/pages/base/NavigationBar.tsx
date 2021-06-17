@@ -1,4 +1,5 @@
 import { Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { APP_NAME } from "../../App";
 import { LINKS } from "./links";
 
@@ -9,7 +10,7 @@ export const NavigationBar = () => (
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className="mr-auto">
           {LINKS.map((link, key) => 
-            <Nav.Link key={key} href={link.link}>{link.label}</Nav.Link>
+            <Nav.Link as={Link} key={key} to={link.link}>{link.label}</Nav.Link>
           )}
         </Nav>
         <Nav>
