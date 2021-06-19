@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { HomeIndex } from "../HomeIndex";
+import { CAROUSEL_ITEMS } from "../carouselItems";
+import { CarouselWrapper } from "../CarouselWrapper";
 
-describe('Home Index', () => {
+describe('Carousel Wrapper', () => {
   it('should render all carousel items', () => {
-    render(<HomeIndex />);
+    render(<CarouselWrapper items={CAROUSEL_ITEMS} />);
 
     const titles = [
       'A new car has arrived',

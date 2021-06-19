@@ -7,7 +7,7 @@ describe('Navigation Bar', () => {
   it('should render all links', () => {
     render(
       <Router>
-        <NavigationBar />
+        <NavigationBar links={LINKS} />
       </Router>
     );
 
