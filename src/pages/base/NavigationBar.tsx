@@ -9,8 +9,10 @@ type Props = {
 
 export const NavigationBar = ({ links }: Props) => {
   return (
-    <Navbar bg='success' variant='dark' expand='lg' className='shadow-sm border-bottom'>
-      <Navbar.Brand href={links[0].link}>{APP_NAME}</Navbar.Brand>
+    <Navbar variant='light' expand='lg' className='shadow-sm border-bottom'>
+      <Navbar.Brand href={links[0].link} className='text-success'>
+        {APP_NAME}
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className="mr-auto">

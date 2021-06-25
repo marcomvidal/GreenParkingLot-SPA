@@ -1,19 +1,15 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { NavigationBar } from "./NavigationBar";
-import { SpotsIndex } from "../spots/SpotsIndex";
 import { HomeIndex } from "../home/HomeIndex";
 import { LINKS } from "./links";
+import { SpotsIndex } from "pages/spots/SpotsIndex";
 
 export const BaseIndex = () => (
   <>
-    <Router>
+    <BrowserRouter>
       <NavigationBar links={LINKS} />
-      <Container>
+      <Container className='my-2'>
         <Switch>
           <Route exact path='/'>
             <HomeIndex />
@@ -23,6 +19,6 @@ export const BaseIndex = () => (
           </Route>
         </Switch>
       </Container>
-    </Router>
+    </BrowserRouter>
   </>
 );
