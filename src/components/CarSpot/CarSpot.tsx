@@ -1,34 +1,30 @@
-import { Car } from "pages/spots/Car";
-import { Spot } from "pages/spots/Spot";
-import { Card } from "react-bootstrap";
+import { Spot } from "models/Spot";
+import { Button, Card } from "react-bootstrap";
+import { CarOverview } from "./CarOverview";
+
+type ButtonProps = {
+  variant: string,
+  label: string,
+}
 
 type Props = {
-  numberShown: number,
   spot: Spot,
-  car: Car|undefined,
 };
 
-export const CarSpot = ({ numberShown, spot, car }: Props) => {
-  return (
-    <Card>
-      <Card.Body>
-        <Card.Title className='text-center'>
-          <h1>{(numberShown + 1)}</h1>
-        </Card.Title>
+export const CarSpot = ({ spot }: Props) => {
+  const buttonProps: ButtonProps  = spot.car
+    ? { variant: 'outline-secondary', label: 'Check out' }
+    : { variant: 'success', label: 'Check in' };
 
-        {car &&
-          <Card.Text>
-            <strong>Model:</strong> {car.model} <br />
-            <strong>License Plate:</strong> {car.licensePlate} <br />
-            <strong>Color:</strong> {car.color}
-          </Card.Text>
-        }
-          
-        {!car &&
-          <Card.Text className='text-center'>
-            This spot is empty.
-          </Card.Text>
-        }
+  return (
+    <Card className='h-100'>
+      <Card.Body className='d-flex flex-column'>
+        <h1 className='text-center'>{spot.label}</h1>
+        <CarOverview car={spot.car} />
+
+        <Button variant={ buttonProps.variant } className='btn-block mt-auto'>
+          { buttonProps.label }
+        </Button>
       </Card.Body>
     </Card>
   );
