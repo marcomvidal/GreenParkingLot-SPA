@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { BaseIndex } from "./pages/base/BaseIndex";
+import { Base } from "./pages/Base";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BaseIndex />
+    <Base />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,18 +1,9 @@
-import { Spot } from "models/Spot";
 import { Button, Card } from "react-bootstrap";
+import { CarSpotButton, CarSpotProps } from "../types";
 import { CarOverview } from "./CarOverview";
 
-type ButtonProps = {
-  variant: string,
-  label: string,
-}
-
-type Props = {
-  spot: Spot,
-};
-
-export const CarSpot = ({ spot }: Props) => {
-  const buttonProps: ButtonProps  = spot.car
+export const CarSpot = ({ spot }: CarSpotProps) => {
+  const buttonProps: CarSpotButton = spot.car
     ? { variant: 'outline-secondary', label: 'Check out' }
     : { variant: 'success', label: 'Check in' };
 

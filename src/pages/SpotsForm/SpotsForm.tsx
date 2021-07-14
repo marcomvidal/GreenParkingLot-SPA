@@ -1,20 +1,14 @@
 import { Spot } from "models/Spot";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
+import { useHistory } from "react-router-dom";
+import { emptySpot } from './data/emptySpot';
 
-type Props = {
-  isOpened: boolean,
-  onHide: () => void,
-};
-
-const emptySpot: Spot = {
-  id: 0,
-  car: undefined,
-  label: '',
-};
-
-export const SpotsForm = ({ isOpened, onHide }: Props) => {
+export const SpotsForm = () => {
+  const history = useHistory();
   const [spot, setSpot] = useState<Spot>(emptySpot);
+
+  const onHide = () => history.goBack();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,15 +17,12 @@ export const SpotsForm = ({ isOpened, onHide }: Props) => {
     onHide();
   }
 
+  const setLabel = (event: ChangeEvent<HTMLInputElement>) => {
+    setSpot({ ...spot, label: event.currentTarget.value });
+  };
+
   return (
-    <Modal
-      show={isOpened}
-      size='lg'
-      animation={false}
-      aria-labelledby='contained-modal-title-vcenter'
-      onHide={onHide}
-      centered
-    >
+    <Modal show={true} size='lg' animation={false} onHide={onHide} centered>
       <Form onSubmit={handleSubmit} method='POST'>
         <Modal.Header closeButton>
           <Modal.Title>New spot</Modal.Title>
@@ -42,8 +33,8 @@ export const SpotsForm = ({ isOpened, onHide }: Props) => {
             <Form.Control
               name='label'
               value={spot.label}
-              placeholder='The label that will appear on Spots dashboard'
-              onChange={(event) => setSpot({ ...spot, label: event.currentTarget.value})}
+              placeholder='The label that will appear on dashboard'
+              onChange={setLabel}
             />
           </Form.Group>
         </Modal.Body>

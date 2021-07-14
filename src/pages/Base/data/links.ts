@@ -1,7 +1,4 @@
-export type NavigationLink = {
-  link: string,
-  label: string,
-};
+import { NavigationLink } from "../types";
 
 export const LINKS: NavigationLink[] = [
   { label: 'Home', link: '/' },

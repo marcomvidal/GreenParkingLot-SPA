@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { CAROUSEL_ITEMS } from "../carouselItems";
-import { CarouselWrapper } from "../CarouselWrapper";
+import { CAROUSEL_ITEMS } from "../data/carouselItems";
+import { CarouselWrapper } from "../components/CarouselWrapper";
 
 describe('Carousel Wrapper', () => {
   it('should render all carousel items', () => {

@@ -1,6 +1,6 @@
 import { Car } from "models/Car";
 import { render, screen } from "@testing-library/react";
-import { CarOverview } from "../CarOverview";
+import { CarOverview } from "../components/CarOverview";
 
 describe('Car Overview', () => {
   it('should render a car when it is defined', () => {

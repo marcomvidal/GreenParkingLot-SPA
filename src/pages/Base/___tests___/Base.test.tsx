@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { APP_NAME } from "App";
-import { BaseIndex } from "../BaseIndex";
+import { Base } from "../Base";
 
-describe('Base Index', () => {
-  it('should render home page properly', () => {
-    render(<BaseIndex />);
+describe('Base', () => {
+  it('should render properly', () => {
+    render(<Base />);
 
     const title = screen.getByText(APP_NAME);
     const carousel = screen.getByTestId('carousel');

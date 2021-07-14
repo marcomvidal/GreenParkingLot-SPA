@@ -1,10 +1,5 @@
-import CarouselPlaceholder from './carousel-placeholder.svg';
-
-export type CarouselItem = {
-  title: string,
-  caption: string,
-  placeholder: string,
-};
+import { CarouselItem } from '../types';
+import CarouselPlaceholder from '../assets/carousel-placeholder.svg';
 
 export const CAROUSEL_ITEMS: CarouselItem[] = [
   {

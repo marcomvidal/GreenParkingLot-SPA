@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Spot } from "models/Spot";
-import { CarSpot } from "../CarSpot";
+import { CarSpot } from "../components/CarSpot";
 
 describe('Car Spot', () => {
   it('should render a car spot with number', () => {
