@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter, useHistory } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { SpotsIndex } from "../SpotsIndex";
-import * as service from 'services/SpotsService';
 import { Spot } from "models/Spot";
+import { getAll } from 'services/SpotsService';
 
 jest.mock('react-router-dom', () => {
   const history = { push: jest.fn() };
@@ -13,6 +13,8 @@ jest.mock('react-router-dom', () => {
     useHistory: () => history,
   };
 });
+
+jest.mock('services/SpotsService');
 
 const mockedSpots: Spot[] = [
   {
@@ -33,13 +35,9 @@ const mockedSpots: Spot[] = [
 ];
 
 describe('Spots Index', () => {
-  let serviceMock: jest.SpyInstance<Spot[], []>;
-
-  afterEach(() => serviceMock.mockRestore());
-
   describe('when spots are registered', () => {
     beforeEach(() => {
-      serviceMock = jest.spyOn(service, 'getAll').mockImplementation(() => mockedSpots);
+      (getAll as jest.Mock).mockImplementation(() => mockedSpots);
       render(<BrowserRouter><SpotsIndex /></BrowserRouter>);
     });
 
@@ -79,7 +77,7 @@ describe('Spots Index', () => {
 
   describe('when there are no spots registered', () => {
     beforeEach(() => {
-      serviceMock = jest.spyOn(service, 'getAll').mockImplementation(() => []);
+      (getAll as jest.Mock).mockImplementation(() => []);
       render(<BrowserRouter><SpotsIndex /></BrowserRouter>);
     });
 
