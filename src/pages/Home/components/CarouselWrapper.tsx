@@ -2,7 +2,7 @@ import { Carousel } from "react-bootstrap";
 import { CarouselWrapperProps } from "../types";
 
 export const CarouselWrapper = ({ items }: CarouselWrapperProps) => (
-  <Carousel fade data-testid='carousel'>
+  <Carousel data-testid='carousel' fade={false} slide={false} >
     {items.map((item, key) => 
       <Carousel.Item key={key}>
         <img src={item.placeholder} className="d-block w-100" alt='Car parking' />

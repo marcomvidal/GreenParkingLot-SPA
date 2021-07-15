@@ -1,6 +1,6 @@
 import { Spot } from "models/Spot";
 
-export const emptySpot: Spot = {
+export const EMPTY_SPOT: Spot = {
   id: 0,
   car: undefined,
   label: '',
