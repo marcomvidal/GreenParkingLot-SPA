@@ -1,8 +1,8 @@
 import { Button, Card } from "react-bootstrap";
 import { CarSpotButton, CarSpotProps } from "../types";
-import { CarOverview } from "./CarOverview";
+import CarOverview from "./CarOverview";
 
-export const CarSpot = ({ spot }: CarSpotProps) => {
+const CarSpot = ({ spot }: CarSpotProps) => {
   const buttonProps: CarSpotButton = spot.car
     ? { variant: 'outline-secondary', label: 'Check out' }
     : { variant: 'success', label: 'Check in' };
@@ -20,3 +20,5 @@ export const CarSpot = ({ spot }: CarSpotProps) => {
     </Card>
   );
 };
+
+export default CarSpot;

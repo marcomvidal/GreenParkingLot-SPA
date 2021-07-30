@@ -1,13 +1,14 @@
-import { CarSpot } from "pages/SpotsIndex/components/CarSpot";
 import { useEffect, useState } from "react";
-import { Col, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import { Route, Switch, useHistory } from "react-router-dom";
+import { Col, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import { getAll } from "services/SpotsService";
-import { Spot } from "../../models/Spot";
-import { SpotsForm } from "../SpotsForm/SpotsForm";
-import { NoSpotPlaceholder } from "./components/NoSpotPlaceholder";
+import CarSpot from "pages/SpotsIndex/components/CarSpot";
+import Spot from "../../models/Spot";
+import SpotsForm from "../SpotsForm/SpotsForm";
+import EmptyPlaceholder from "components/EmptyPlaceholder";
+import './styles/SpotsIndex.css';
 
-export const SpotsIndex = () => {
+const SpotsIndex = () => {
   const history = useHistory();
   const [spots, setSpots] = useState<Spot[]>([]);
 
@@ -25,7 +26,7 @@ export const SpotsIndex = () => {
         </Dropdown.Item>
       </DropdownButton>
 
-      { spots && spots.length > 0
+      {spots && spots.length > 0
         ?
         <Row xs={1} md={2} lg={3}>
           {spots.map((spot: Spot) => 
@@ -35,7 +36,7 @@ export const SpotsIndex = () => {
           )}
         </Row>
         :
-        <NoSpotPlaceholder onCreateSpot={onCreateSpot} />
+        <EmptyPlaceholder message='No spots registered yet.' onClick={onCreateSpot} />
       }
 
       <Switch>
@@ -49,3 +50,5 @@ export const SpotsIndex = () => {
     </>
   );
 }
+
+export default SpotsIndex;

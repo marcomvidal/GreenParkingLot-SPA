@@ -1,21 +1,21 @@
-import { Spot } from "models/Spot";
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
 import { useHistory } from "react-router-dom";
+import Spot from "models/Spot";
+import EMPTY_SPOT from './constants/emptySpot';
 import { save } from "services/SpotsService";
-import { EMPTY_SPOT } from './data/emptySpot';
 
-export const SpotsForm = () => {
+const SpotsForm = () => {
   const history = useHistory();
   const [spot, setSpot] = useState<Spot>(EMPTY_SPOT);
-
-  const onHide = () => { history.goBack(); }
-
-  const setLabel = (label: string) => setSpot({ ...spot, label });
-
+  const [isDirty, setIsDirty] = useState<boolean>(false);
   const isValid = spot.label.length > 0 && spot.label.length <= 8;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const setLabel = (label: string) => setSpot({ ...spot, label });
+  const onHide = () => { history.goBack(); }
+  const onFill = () => { if (!isDirty) setIsDirty(true); };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     save(spot);
     setSpot(EMPTY_SPOT);
@@ -24,7 +24,7 @@ export const SpotsForm = () => {
   
   return (
     <Modal show={true} size='lg' animation={false} onHide={onHide} centered>
-      <Form onSubmit={handleSubmit} method='POST'>
+      <Form onSubmit={onSubmit} method='POST'>
         <Modal.Header closeButton>
           <Modal.Title>New spot</Modal.Title>
         </Modal.Header>
@@ -35,9 +35,13 @@ export const SpotsForm = () => {
               id='label'
               name='label'
               value={spot.label}
-              placeholder='The label that will appear on the dashboard'
+              isInvalid={isDirty && !isValid}
               onChange={(e) => setLabel(e.currentTarget.value)}
+              onInput={onFill}
             />
+            <Form.Control.Feedback type='invalid'>
+              Label must have between 1 and 8 characters
+            </Form.Control.Feedback>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
@@ -48,3 +52,5 @@ export const SpotsForm = () => {
     </Modal>
   );
 }
+
+export default SpotsForm;

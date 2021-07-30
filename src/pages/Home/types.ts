@@ -1,9 +1,11 @@
-export type CarouselItem = {
+type CarouselItem = {
   title: string,
   caption: string,
   placeholder: string,
 };
 
-export type CarouselWrapperProps = {
+type CarouselWrapperProps = {
   items: CarouselItem[],
 }
+
+export type { CarouselItem, CarouselWrapperProps };

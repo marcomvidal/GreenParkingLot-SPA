@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { APP_NAME } from "App";
 import { NavigationBarProps } from "../types";
 
-export const NavigationBar = ({ links }: NavigationBarProps) => (
+const NavigationBar = ({ links }: NavigationBarProps) => (
   <Navbar variant='light' expand='lg' className='shadow-sm border-bottom fixed-top' bg='white'>
-    <Navbar.Brand href={links[0].link} className='text-success'>
+    <Navbar.Brand href={links[0].link} className='text-success' data-testid='logo'>
       {APP_NAME}
     </Navbar.Brand>
     <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -21,3 +21,5 @@ export const NavigationBar = ({ links }: NavigationBarProps) => (
     </Navbar.Collapse>
   </Navbar>
 );
+
+export default NavigationBar;

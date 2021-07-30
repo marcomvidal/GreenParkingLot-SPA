@@ -1,8 +1,10 @@
-export type NavigationLink = {
+type NavigationLink = {
   link: string,
   label: string,
 };
 
-export type NavigationBarProps = {
+type NavigationBarProps = {
   links: NavigationLink[];
 }
+
+export type { NavigationLink, NavigationBarProps };

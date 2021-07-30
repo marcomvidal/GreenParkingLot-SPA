@@ -1,19 +1,21 @@
-import { Car } from "models/Car";
-import { Spot } from "models/Spot";
+import Car from "models/Car";
+import Spot from "models/Spot";
 
-export type CarSpotButton = {
+type CarSpotButton = {
   variant: string,
   label: string,
 };
 
-export type CarSpotProps = {
+type CarSpotProps = {
   spot: Spot,
 };
 
-export type CarOverviewProps = {
+type CarOverviewProps = {
   car: Car|undefined,
 };
 
-export type NoSpotPlaceholderProps = {
+type NoSpotPlaceholderProps = {
   onCreateSpot: () => void;
 };
+
+export type { CarSpotButton, CarSpotProps, CarOverviewProps, NoSpotPlaceholderProps };

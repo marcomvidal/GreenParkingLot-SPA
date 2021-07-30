@@ -1,7 +1,7 @@
 import { Carousel } from "react-bootstrap";
 import { CarouselWrapperProps } from "../types";
 
-export const CarouselWrapper = ({ items }: CarouselWrapperProps) => (
+const CarouselWrapper = ({ items }: CarouselWrapperProps) => (
   <Carousel data-testid='carousel' fade={false} slide={false} >
     {items.map((item, key) => 
       <Carousel.Item key={key}>
@@ -14,3 +14,5 @@ export const CarouselWrapper = ({ items }: CarouselWrapperProps) => (
     )}
   </Carousel>
 );
+
+export default CarouselWrapper;

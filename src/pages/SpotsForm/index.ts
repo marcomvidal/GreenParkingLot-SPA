@@ -1,3 +1,1 @@
-import { SpotsForm } from "./SpotsForm";
-
-export { SpotsForm };
+export { default } from "./SpotsForm";

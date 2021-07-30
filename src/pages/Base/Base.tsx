@@ -1,12 +1,13 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { NavigationBar } from "./components/NavigationBar";
-import { Home } from "../Home";
-import { SpotsIndex } from "../SpotsIndex";
-import { LINKS } from "./data/links";
+import NavigationBar from "./components/NavigationBar";
+import Home from "../Home";
+import SpotsIndex from "../SpotsIndex";
+import CarsIndex from "pages/CarsIndex/CarsIndex";
+import LINKS from "./data/links";
 
-export const Base = () => (
-  <BrowserRouter>
+const Base = () => (
+  <>
     <NavigationBar links={LINKS} />
     <Container className='h-100' style={{ paddingTop: '4rem' }}>
       <Switch>
@@ -16,7 +17,12 @@ export const Base = () => (
         <Route path='/spots'>
           <SpotsIndex />
         </Route>
+        <Route path='/cars'>
+          <CarsIndex />
+        </Route>
       </Switch>
     </Container>
-  </BrowserRouter>
+  </>
 );
+
+export default Base;
