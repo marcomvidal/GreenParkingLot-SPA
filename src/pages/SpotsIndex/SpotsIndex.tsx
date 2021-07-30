@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { Col, Dropdown, DropdownButton, Row } from "react-bootstrap";
 import { getAll } from "services/SpotsService";
 import CarSpot from "pages/SpotsIndex/components/CarSpot";
+import SearchBar from "components/SearchBar";
 import Spot from "../../models/Spot";
 import SpotsForm from "../SpotsForm/SpotsForm";
 import EmptyPlaceholder from "components/EmptyPlaceholder";
@@ -10,13 +11,20 @@ import './styles/SpotsIndex.css';
 
 const SpotsIndex = () => {
   const history = useHistory();
-  const [spots, setSpots] = useState<Spot[]>([]);
+  const spots = getAll();
+  const [filteredSpots, setFilteredSpots] = useState<Spot[]>(spots);
 
-  const onCreateSpot = () => { history.push('/spots/create'); };
+  const onCreateSpot = () => history.push('/spots/create');
 
-  useEffect(() => {
-    setSpots(getAll());
-  }, []);
+  const onSearchTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value.toLowerCase();
+
+    const filteringResult = spots.filter(
+      ({ car }) => car?.model.toLowerCase().includes(value)
+        || car?.licensePlate.toLowerCase().includes(value));
+    
+    setFilteredSpots(value.length > 0 ? filteringResult : spots);
+  };
 
   return (
     <>
@@ -26,10 +34,15 @@ const SpotsIndex = () => {
         </Dropdown.Item>
       </DropdownButton>
 
+      <SearchBar
+        placeholder='Search a car by its model or license plate'
+        onChange={onSearchTextChange}
+      />
+
       {spots && spots.length > 0
         ?
         <Row xs={1} md={2} lg={3}>
-          {spots.map((spot: Spot) => 
+          {filteredSpots.map((spot: Spot) => 
             <Col key={spot.id} className='my-2'>
               <CarSpot spot={spot} />
             </Col>

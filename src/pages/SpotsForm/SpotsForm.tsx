@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
 import { useHistory } from "react-router-dom";
 import Spot from "models/Spot";
@@ -12,8 +12,11 @@ const SpotsForm = () => {
   const isValid = spot.label.length > 0 && spot.label.length <= 8;
 
   const setLabel = (label: string) => setSpot({ ...spot, label });
-  const onHide = () => { history.goBack(); }
+  const onHide = () => history.goBack();
   const onFill = () => { if (!isDirty) setIsDirty(true); };
+  const onLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLabel(e.currentTarget.value);
+  }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +39,7 @@ const SpotsForm = () => {
               name='label'
               value={spot.label}
               isInvalid={isDirty && !isValid}
-              onChange={(e) => setLabel(e.currentTarget.value)}
+              onChange={onLabelChange}
               onInput={onFill}
             />
             <Form.Control.Feedback type='invalid'>
