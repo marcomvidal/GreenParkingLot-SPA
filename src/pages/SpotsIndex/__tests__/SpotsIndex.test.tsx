@@ -1,18 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter, useHistory } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import userEvent from "@testing-library/user-event";
-import { SpotsIndex } from "../SpotsIndex";
-import { Spot } from "models/Spot";
+import SpotsIndex from "../SpotsIndex";
+import Spot from "models/Spot";
 import { getAll } from 'services/SpotsService';
-
-jest.mock('react-router-dom', () => {
-  const history = { push: jest.fn() };
-
-  return {
-    ...jest.requireActual('react-router-dom'),
-    useHistory: () => history,
-  };
-});
 
 jest.mock('services/SpotsService');
 
@@ -34,11 +26,13 @@ const mockedSpots: Spot[] = [
   },
 ];
 
+const history = createBrowserHistory();
+
 describe('Spots Index', () => {
   describe('when spots are registered', () => {
     beforeEach(() => {
       (getAll as jest.Mock).mockImplementation(() => mockedSpots);
-      render(<BrowserRouter><SpotsIndex /></BrowserRouter>);
+      render(<Router history={history}><SpotsIndex /></Router>);
     });
 
     it('should render all spots information', () => {
@@ -51,10 +45,10 @@ describe('Spots Index', () => {
       elements.forEach((element) => expect(element).toBeInTheDocument());
     });
 
-    it('should render all cars information', () => {
+    it('should render all cars', () => {
       const elements = [
-        screen.getByText('Viper GTS (Blue)'),
-        screen.getByText('NSX Type S (White)'),
+        screen.getByText('Viper GTS'),
+        screen.getByText('NSX Type S'),
         screen.getByText('This spot is empty.'),
       ];
     
@@ -71,14 +65,14 @@ describe('Spots Index', () => {
       userEvent.click(screen.getByText('Actions'));
       userEvent.click(screen.getByText('Add Spot'));
 
-      expect(useHistory().push).toHaveBeenCalledWith('/spots/create');
+      expect(history.location.pathname).toBe('/spots/create');
     });
   });
 
   describe('when there are no spots registered', () => {
     beforeEach(() => {
       (getAll as jest.Mock).mockImplementation(() => []);
-      render(<BrowserRouter><SpotsIndex /></BrowserRouter>);
+      render(<Router history={history}><SpotsIndex /></Router>);
     });
 
     it('should render properly', () => {
@@ -90,7 +84,7 @@ describe('Spots Index', () => {
     it('should open form to add a new spot by button', () => {
       userEvent.click(screen.getByText('Start now'));
 
-      expect(useHistory().push).toHaveBeenCalledWith('/spots/create');
+      expect(history.location.pathname).toBe('/spots/create');
     });
   });
 });

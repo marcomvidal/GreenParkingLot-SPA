@@ -1,17 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
-import { SpotsForm } from "../SpotsForm";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import SpotsForm from "../SpotsForm";
 import { save } from 'services/SpotsService';
 
 jest.mock('services/SpotsService');
 
-jest.mock('react-router-dom', () => ({
-  useHistory: () => ({ goBack: jest.fn() }),
-}));
+const history = createMemoryHistory({ initialEntries: ['/spots', '/spots/create'] });
 
 describe('Spots Form', () => {
   beforeEach(() => {
-    render(<SpotsForm />);
+    render(<Router history={history}><SpotsForm /></Router>);
   });
 
   it('should render the form correctly', () => {
@@ -47,6 +47,12 @@ describe('Spots Form', () => {
       userEvent.click(screen.getByText('Submit'));
 
       expect(save).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('when cancel button is clicked', () => {
+    it('should go back on navigation', () => {
+      expect(history.location.pathname).toBe('/spots');
     });
   });
 });

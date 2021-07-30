@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { NoSpotPlaceholder } from "../components/NoSpotPlaceholder";
+import EmptyPlaceholder from "../EmptyPlaceholder";
 
-describe('No Spot Placeholder', () => {
+const action = jest.fn();
+
+describe('Empty Placeholder', () => {
   it('should trigger action when button is pressed', () => {
-    const action = jest.fn();
-    render(<NoSpotPlaceholder onCreateSpot={action} />);
+    render(<EmptyPlaceholder message='No resources registered yet' onClick={action} />);
 
     userEvent.click(screen.getByText('Start now'));
 
