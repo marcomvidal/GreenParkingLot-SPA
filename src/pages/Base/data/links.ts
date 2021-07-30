@@ -1,6 +1,9 @@
 import { NavigationLink } from "../types";
 
-export const LINKS: NavigationLink[] = [
+const LINKS: NavigationLink[] = [
   { label: 'Home', link: '/' },
   { label: 'Spots', link: '/spots' },
+  { label: 'Cars', link: '/cars' },
 ];
+
+export default LINKS;

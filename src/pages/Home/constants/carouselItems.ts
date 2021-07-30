@@ -1,7 +1,7 @@
 import { CarouselItem } from '../types';
 import CarouselPlaceholder from '../assets/carousel-placeholder.svg';
 
-export const CAROUSEL_ITEMS: CarouselItem[] = [
+const CAROUSEL_ITEMS: CarouselItem[] = [
   {
     title: 'A new car has arrived',
     caption: 'Register it and its characterics while it is parking.',
@@ -18,3 +18,5 @@ export const CAROUSEL_ITEMS: CarouselItem[] = [
     placeholder: CarouselPlaceholder,
   },
 ];
+
+export default CAROUSEL_ITEMS;
