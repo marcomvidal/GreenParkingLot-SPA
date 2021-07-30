@@ -1,6 +1,8 @@
-import { Spot } from "models/Spot";
-import { SPOTS } from "pages/SpotsIndex/data/spots";
+import Spot from "models/Spot";
+import SPOTS from "pages/SpotsIndex/constants/spots";
 
-export const getAll = () => SPOTS;
+const getAll = () => SPOTS;
 
-export const save = (spot: Spot) => {};
+const save = (spot: Spot) => {};
+
+export { getAll, save };
