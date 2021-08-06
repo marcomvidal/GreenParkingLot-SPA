@@ -7,6 +7,7 @@ import Car from "models/Car";
 import CARS from "pages/CarsIndex/constants/cars";
 import EMPTY_CAR from "./constants/emptyCar";
 import { CarsFormParams } from "./types";
+import FormControl from "components/FormControl";
 import { save } from "services/CarsService";
 
 const CarsForm = () => {
@@ -41,7 +42,7 @@ const CarsForm = () => {
         <Modal.Body>
           <Form.Group>
             <Form.Label htmlFor='model'>Model</Form.Label>
-            <Form.Control
+            <FormControl
               id='model'
               isInvalid={errors.model !== undefined}
               { ...register('model') }
@@ -52,7 +53,7 @@ const CarsForm = () => {
           </Form.Group>
           <Form.Group>
             <Form.Label htmlFor='licensePlate'>License Plate</Form.Label>
-            <Form.Control
+            <FormControl
               id='licensePlate'
               isInvalid={errors.licensePlate !== undefined}
               { ...register('licensePlate') }
@@ -63,7 +64,7 @@ const CarsForm = () => {
           </Form.Group>
           <Form.Group>
             <Form.Label htmlFor='color'>Color</Form.Label>
-            <Form.Control
+            <FormControl
               id="color"
               type="color"
               { ...register('color') }

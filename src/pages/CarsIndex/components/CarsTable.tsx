@@ -1,6 +1,6 @@
-import Dot from "components/Dot";
 import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import Dot from "components/Dot";
 import { CarsTableProps } from "../types";
 
 const CarsTable = ({ cars }: CarsTableProps) => {

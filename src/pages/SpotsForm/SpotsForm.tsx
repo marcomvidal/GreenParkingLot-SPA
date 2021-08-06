@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
 import { useHistory } from "react-router-dom";
+import FormControl from "components/FormControl";
 import Spot from "models/Spot";
 import EMPTY_SPOT from './constants/emptySpot';
 import { save } from "services/SpotsService";
@@ -34,7 +35,7 @@ const SpotsForm = () => {
         <Modal.Body>
           <Form.Group>
             <Form.Label htmlFor='label'>Label</Form.Label>
-            <Form.Control
+            <FormControl
               id='label'
               name='label'
               value={spot.label}

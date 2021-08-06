@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { Col, Dropdown, DropdownButton, Row } from "react-bootstrap";
+import { Col, DropdownButton, Row } from "react-bootstrap";
 import { getAll } from "services/SpotsService";
 import CarSpot from "pages/SpotsIndex/components/CarSpot";
 import SearchBar from "components/SearchBar";
 import Spot from "../../models/Spot";
 import SpotsForm from "../SpotsForm/SpotsForm";
 import EmptyPlaceholder from "components/EmptyPlaceholder";
+import DropdownItem from "components/DropDownItem";
 import './styles/SpotsIndex.css';
 
 const SpotsIndex = () => {
@@ -29,9 +30,9 @@ const SpotsIndex = () => {
   return (
     <>
       <DropdownButton title='Actions' variant='success'>
-        <Dropdown.Item onClick={onCreateSpot}>
+        <DropdownItem onClick={onCreateSpot}>
           Add Spot
-        </Dropdown.Item>
+        </DropdownItem>
       </DropdownButton>
 
       <SearchBar
