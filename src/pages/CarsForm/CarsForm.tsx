@@ -7,12 +7,13 @@ import Car from "models/Car";
 import CARS from "pages/CarsIndex/constants/cars";
 import EMPTY_CAR from "./constants/emptyCar";
 import { CarsFormParams } from "./types";
-import FormControl from "components/FormControl";
 import { save } from "services/CarsService";
+import FormTextField from "components/FormTextField";
 
 const CarsForm = () => {
   const { id } = useParams<CarsFormParams>();
   const history = useHistory();
+  const car = CARS[(Number(id) - 1)] ?? EMPTY_CAR;
 
   const schema: SchemaOf<Car> = object({
     id: number().notRequired(),
@@ -22,57 +23,46 @@ const CarsForm = () => {
   }).defined();
 
   const { handleSubmit, register, formState: { errors, isValid } } = useForm<Car>({
-    defaultValues: CARS[(Number(id) - 1)] ?? EMPTY_CAR,
+    defaultValues: car,
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
 
   const onSubmit = (data: Car) => {
     save(data);
+    onHide();
   }
 
-  const onHide = () => { history.goBack() };
+  const onHide = () => history.goBack();
 
   return (
     <Modal show={true} size='lg' animation={false} onHide={onHide} centered>
       <Form onSubmit={handleSubmit(onSubmit)} method='POST'>
         <Modal.Header closeButton>
-          <Modal.Title>New car</Modal.Title>
+          <Modal.Title>
+            {car.id ? `Editting ${car.model} (${car.licensePlate})` : 'New car'}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Group>
-            <Form.Label htmlFor='model'>Model</Form.Label>
-            <FormControl
-              id='model'
-              isInvalid={errors.model !== undefined}
-              { ...register('model') }
-            />
-            <Form.Control.Feedback type='invalid'>
-              {errors.model?.message}
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label htmlFor='licensePlate'>License Plate</Form.Label>
-            <FormControl
-              id='licensePlate'
-              isInvalid={errors.licensePlate !== undefined}
-              { ...register('licensePlate') }
-            />
-            <Form.Control.Feedback type='invalid'>
-              {errors.licensePlate?.message}
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label htmlFor='color'>Color</Form.Label>
-            <FormControl
-              id="color"
-              type="color"
-              { ...register('color') }
-            />
-            <Form.Control.Feedback type='invalid'>
-              {errors.color?.message}
-            </Form.Control.Feedback>
-          </Form.Group>
+          <FormTextField
+            id='model'
+            label='Model'
+            errors={errors.model}
+            {...register('model')}
+          />
+          <FormTextField
+            id='licensePlate'
+            label='License Plate'
+            errors={errors.licensePlate}
+            {...register('licensePlate')}
+          />
+          <FormTextField
+            id='color'
+            label='Color'
+            type='color'
+            errors={errors.color}
+            {...register('color')}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant='outline-secondary' onClick={onHide}>Cancel</Button>

@@ -15,6 +15,7 @@ const SpotsForm = () => {
   const setLabel = (label: string) => setSpot({ ...spot, label });
   const onHide = () => history.goBack();
   const onFill = () => { if (!isDirty) setIsDirty(true); };
+  
   const onLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLabel(e.currentTarget.value);
   }
