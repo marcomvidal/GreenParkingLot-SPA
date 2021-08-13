@@ -9,13 +9,14 @@ import SpotsForm from "../SpotsForm/SpotsForm";
 import EmptyPlaceholder from "components/EmptyPlaceholder";
 import DropdownItem from "components/DropDownItem";
 import './styles/SpotsIndex.css';
+import CheckInForm from "pages/CheckInForm";
+import CheckOutForm from "pages/CheckOutForm";
 
 const SpotsIndex = () => {
   const history = useHistory();
   const spots = getAll();
   const [filteredSpots, setFilteredSpots] = useState<Spot[]>(spots);
-
-  const onCreateSpot = () => history.push('/spots/create');
+  const [currentSpot, setCurrentSpot] = useState<Spot|undefined>();
 
   const onSearchTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value.toLowerCase();
@@ -26,6 +27,13 @@ const SpotsIndex = () => {
     
     setFilteredSpots(value.length > 0 ? filteringResult : spots);
   };
+
+  const onSpotClick = (spot: Spot, url: string) => {
+    setCurrentSpot(spot);
+    history.push(url);
+  };
+
+  const onCreateSpot = () => history.push('/spots/create');
 
   return (
     <>
@@ -45,7 +53,7 @@ const SpotsIndex = () => {
         <Row xs={1} md={2} lg={3}>
           {filteredSpots.map((spot: Spot) => 
             <Col key={spot.id} className='my-2'>
-              <CarSpot spot={spot} />
+              <CarSpot spot={spot} onSpotClick={onSpotClick} />
             </Col>
           )}
         </Row>
@@ -58,7 +66,10 @@ const SpotsIndex = () => {
           <SpotsForm />
         </Route>
         <Route path='/spots/:id/check-in'>
-          <h1>HELLO!</h1>
+          <CheckInForm spot={currentSpot} />
+        </Route>
+        <Route path='/spots/:id/check-out'>
+          <CheckOutForm />
         </Route>
       </Switch>
     </>

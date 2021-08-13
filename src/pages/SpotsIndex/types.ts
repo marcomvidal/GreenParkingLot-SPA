@@ -2,20 +2,27 @@ import Car from "models/Car";
 import Spot from "models/Spot";
 
 type CarSpotButton = {
-  variant: string,
-  label: string,
+  label: string;
+  variant: string;
+  url: string;
 };
 
 type CarSpotProps = {
-  spot: Spot,
+  spot: Spot;
+  onSpotClick: (spot: Spot, url: string) => void;
 };
 
 type CarOverviewProps = {
-  car: Car|undefined,
+  car: Car | undefined;
 };
 
 type NoSpotPlaceholderProps = {
   onCreateSpot: () => void;
 };
 
-export type { CarSpotButton, CarSpotProps, CarOverviewProps, NoSpotPlaceholderProps };
+export type {
+  CarSpotButton,
+  CarSpotProps,
+  CarOverviewProps,
+  NoSpotPlaceholderProps,
+};
