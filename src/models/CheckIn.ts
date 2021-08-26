@@ -1,9 +1,6 @@
-import Car from "./Car";
-import Spot from "./Spot";
-
 type CheckIn = {
-  car: Car;
-  spot: Spot;
+  carId?: number;
+  spotId: number;
   startTime: Date;
 };
 

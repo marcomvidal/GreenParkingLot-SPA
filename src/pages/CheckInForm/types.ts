@@ -7,8 +7,8 @@ type CarListGroupItemProps = {
 
 type CarSelectorProps = {
   cars: Car[];
-  selectedCar?: Car;
-  onChange: (car: Car) => void;
+  name: string;
+  defaultValue?: number;
 };
 
 type CheckInFormProps = {
