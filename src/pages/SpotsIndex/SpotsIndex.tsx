@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { Col, DropdownButton, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { getAll } from "services/SpotsService";
 import CarSpot from "pages/SpotsIndex/components/CarSpot";
-import SearchBar from "components/SearchBar";
 import Spot from "../../models/Spot";
 import SpotsForm from "../SpotsForm/SpotsForm";
 import EmptyPlaceholder from "components/EmptyPlaceholder";
@@ -11,6 +10,7 @@ import DropdownItem from "components/DropDownItem";
 import './styles/SpotsIndex.css';
 import CheckInForm from "pages/CheckInForm";
 import CheckOutForm from "pages/CheckOutForm";
+import ActionBar from "components/ActionBar";
 
 const SpotsIndex = () => {
   const history = useHistory();
@@ -37,16 +37,11 @@ const SpotsIndex = () => {
 
   return (
     <>
-      <DropdownButton title='Actions' variant='success'>
-        <DropdownItem onClick={onCreateSpot}>
-          Add Spot
-        </DropdownItem>
-      </DropdownButton>
-
-      <SearchBar
-        placeholder='Search a car by its model or license plate'
-        onChange={onSearchTextChange}
-      />
+      <ActionBar
+        searchPlaceholder='Search a car by its model or license plate'
+        onSearchTextChange={onSearchTextChange}>
+        <DropdownItem onClick={onCreateSpot}>Add spot</DropdownItem>
+      </ActionBar>
 
       {spots && spots.length > 0
         ?

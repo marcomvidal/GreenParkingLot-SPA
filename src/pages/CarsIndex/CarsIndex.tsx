@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { DropdownButton } from "react-bootstrap";
 import { getAll } from "services/CarsService";
 import Car from "models/Car";
 import CarsForm from "pages/CarsForm/CarsForm";
 import CarsTable from "./components/CarsTable";
 import EmptyPlaceholder from "components/EmptyPlaceholder";
-import SearchBar from "components/SearchBar";
 import DropdownItem from "components/DropDownItem";
+import ActionBar from "components/ActionBar";
 
 const CarsIndex = () => {
   const history = useHistory();
@@ -27,16 +26,11 @@ const CarsIndex = () => {
 
   return (
     <>
-      <DropdownButton title='Actions' variant='success'>
-        <DropdownItem onClick={onCreateCar}>
-          Add car
-        </DropdownItem>
-      </DropdownButton>
-
-      <SearchBar
-        placeholder='Search a car by its model or license plate'
-        onChange={onSearchTextChange}
-      />
+      <ActionBar
+        searchPlaceholder='Search a car by its model or license plate'
+        onSearchTextChange={onSearchTextChange}>
+        <DropdownItem onClick={onCreateCar}>Add car</DropdownItem>
+      </ActionBar>
 
       {cars && cars.length > 0
         ?
