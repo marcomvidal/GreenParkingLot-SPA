@@ -1,9 +1,9 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import FormControl from "components/FormControl";
-import { FormTextFieldProps } from "./types";
+import { FormFieldProps } from "./types";
 
-const FormTextField = React.forwardRef<HTMLInputElement, FormTextFieldProps>(
+const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
   ({ label, errors, id, ...props }, ref) => (
     <Form.Group>
       <Form.Label htmlFor={id}>{label}</Form.Label>
@@ -14,9 +14,9 @@ const FormTextField = React.forwardRef<HTMLInputElement, FormTextFieldProps>(
         ref={ref}
       />
       <Form.Control.Feedback type='invalid'>
-        { errors?.message }
+        {errors?.message}
       </Form.Control.Feedback>
     </Form.Group>
 ));
 
-export default FormTextField;
+export default FormField;

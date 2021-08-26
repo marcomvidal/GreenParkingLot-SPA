@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap"
+import { Form, Modal } from "react-bootstrap"
 import { useHistory } from "react-router-dom";
 import FormControl from "components/FormControl";
 import Spot from "models/Spot";
 import EMPTY_SPOT from './constants/emptySpot';
 import { save } from "services/SpotsService";
+import SubmitFormSet from "components/SubmitFormSet";
 
 const SpotsForm = () => {
   const history = useHistory();
@@ -49,10 +50,7 @@ const SpotsForm = () => {
             </Form.Control.Feedback>
           </Form.Group>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant='outline-secondary' onClick={onHide}>Cancel</Button>
-          <Button variant='success' type='submit' disabled={!isValid}>Submit</Button>
-        </Modal.Footer>
+        <SubmitFormSet onCancelClick={onHide} isValid={isValid} />
       </Form>
     </Modal>
   );

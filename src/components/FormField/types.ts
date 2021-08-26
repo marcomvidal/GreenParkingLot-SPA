@@ -1,9 +1,9 @@
 import { InputHTMLAttributes } from "react";
 import { FieldError } from "react-hook-form";
 
-type FormTextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+type FormFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   errors: FieldError | undefined;
 };
 
-export type { FormTextFieldProps };
+export type { FormFieldProps };

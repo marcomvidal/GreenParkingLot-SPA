@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import { SchemaOf, object, string, number } from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import Car from "models/Car";
@@ -8,7 +8,8 @@ import CARS from "pages/CarsIndex/constants/cars";
 import EMPTY_CAR from "./constants/emptyCar";
 import { CarsFormParams } from "./types";
 import { save } from "services/CarsService";
-import FormTextField from "components/FormTextField";
+import FormField from "components/FormField";
+import SubmitFormSet from "components/SubmitFormSet";
 
 const CarsForm = () => {
   const { id } = useParams<CarsFormParams>();
@@ -44,19 +45,19 @@ const CarsForm = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormTextField
+          <FormField
             id='model'
             label='Model'
             errors={errors.model}
             {...register('model')}
           />
-          <FormTextField
+          <FormField
             id='licensePlate'
             label='License Plate'
             errors={errors.licensePlate}
             {...register('licensePlate')}
           />
-          <FormTextField
+          <FormField
             id='color'
             label='Color'
             type='color'
@@ -64,10 +65,7 @@ const CarsForm = () => {
             {...register('color')}
           />
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant='outline-secondary' onClick={onHide}>Cancel</Button>
-          <Button variant='success' type='submit' disabled={!isValid}>Submit</Button>
-        </Modal.Footer>
+        <SubmitFormSet onCancelClick={onHide} isValid={isValid} />
       </Form>
     </Modal>
   );
