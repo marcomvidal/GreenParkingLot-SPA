@@ -16,7 +16,7 @@ const CheckInForm = ({ spot }: CheckInFormProps) => {
 
   const formData = useForm<CheckIn>({
     defaultValues: { carId: undefined, spotId: spot?.id, startTime: now },
-    mode: 'onSubmit',
+    mode: 'onChange',
   });
 
   const { handleSubmit, formState: { errors, isValid }, register } = formData;
@@ -24,7 +24,7 @@ const CheckInForm = ({ spot }: CheckInFormProps) => {
 
   const onSubmit = (checkIn: CheckIn) => {
     save(checkIn);
-    console.log('submitted!');
+    onHide();
   };
   
   return (

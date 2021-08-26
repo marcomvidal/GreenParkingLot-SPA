@@ -19,6 +19,7 @@ const CarSelector = ({ cars, name, defaultValue }: CarSelectorProps) => {
         {cars.map((car, key) => 
           <ListGroup.Item
             key={key}
+            type='button'
             active={value === car.id}
             onClick={() => onChange(car.id)}
             variant='success'
