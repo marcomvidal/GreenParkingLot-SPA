@@ -1,13 +1,13 @@
-import { useHistory } from "react-router-dom";
-import { Form, Modal } from "react-bootstrap";
-import { FormProvider, useForm } from "react-hook-form";
-import { CheckInFormProps } from "./types";
-import { getAll } from "services/CarsService";
-import CarSelector from "./components/CarSelector";
-import CheckIn from "models/CheckIn";
-import FormField from "components/FormField";
-import SubmitFormSet from "components/SubmitFormSet";
-import { save } from "services/CheckInService";
+import { useHistory } from 'react-router-dom';
+import { Form, Modal } from 'react-bootstrap';
+import { FormProvider, useForm } from 'react-hook-form';
+import { CheckInFormProps } from './types';
+import { getAll } from 'services/CarsService';
+import CarSelector from './components/CarSelector';
+import CheckIn from 'models/CheckIn';
+import FormField from 'components/FormField';
+import SubmitFormSet from 'components/SubmitFormSet';
+import { save } from 'services/CheckInService';
 
 const CheckInForm = ({ spot }: CheckInFormProps) => {
   const history = useHistory();
@@ -19,14 +19,18 @@ const CheckInForm = ({ spot }: CheckInFormProps) => {
     mode: 'onChange',
   });
 
-  const { handleSubmit, formState: { errors, isValid }, register } = formData;
+  const {
+    handleSubmit,
+    formState: { errors, isValid },
+    register,
+  } = formData;
   const onHide = () => history.goBack();
 
   const onSubmit = (checkIn: CheckIn) => {
     save(checkIn);
     onHide();
   };
-  
+
   return (
     <Modal show={true} size='lg' animation={false} onHide={onHide} centered>
       <FormProvider {...formData}>
@@ -50,6 +54,6 @@ const CheckInForm = ({ spot }: CheckInFormProps) => {
       </FormProvider>
     </Modal>
   );
-}
+};
 
 export default CheckInForm;

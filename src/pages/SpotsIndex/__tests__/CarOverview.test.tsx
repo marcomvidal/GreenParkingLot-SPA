@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
-import Car from "models/Car";
-import CarOverview from "../components/CarOverview";
+import { render, screen } from '@testing-library/react';
+import Car from 'models/Car';
+import CarOverview from '../components/CarOverview';
 
 describe('Car Overview', () => {
   describe('when car is defined', () => {
@@ -18,13 +18,13 @@ describe('Car Overview', () => {
         screen.getByText(car.licensePlate),
         screen.getByTestId('color-dot'),
       ];
-  
-      elements.forEach((element) => expect(element).toBeInTheDocument());
+
+      elements.forEach(element => expect(element).toBeInTheDocument());
     });
-  
+
     it("should render the car's color", () => {
       const color = screen.getByTestId('color-dot');
-  
+
       expect(color).toHaveStyle(`background-color: ${car.color}`);
     });
   });
@@ -34,7 +34,7 @@ describe('Car Overview', () => {
 
     it('should render a placeholder', () => {
       const placeholder = screen.getByText('This spot is empty.');
-  
+
       expect(placeholder).toBeInTheDocument();
     });
   });

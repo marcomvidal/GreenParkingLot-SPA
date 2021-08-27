@@ -1,26 +1,32 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
-import { Router } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
-import { createMemoryHistory } from "history";
-import CarsForm from "../CarsForm";
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
+import { createMemoryHistory } from 'history';
+import CarsForm from '../CarsForm';
 import { save } from 'services/CarsService';
 
 jest.mock('services/CarsService');
 
 describe('Cars Form', () => {
-  const history = createMemoryHistory({ initialEntries: ['/cars', '/cars/create']});
+  const history = createMemoryHistory({ initialEntries: ['/cars', '/cars/create'] });
 
-  beforeEach(() => render(<Router history={history}><CarsForm /></Router>));
+  beforeEach(() =>
+    render(
+      <Router history={history}>
+        <CarsForm />
+      </Router>,
+    ),
+  );
 
   it('should render properly', () => {
     const labelNames = ['Model', 'License Plate', 'Color'];
     const elements = [
-      ...labelNames.map((label) => screen.getByText(label)),
-      ...labelNames.map((label) => screen.getByLabelText(label)),
-      ...['Cancel', 'Submit'].map((button) => screen.getByText(button)),
+      ...labelNames.map(label => screen.getByText(label)),
+      ...labelNames.map(label => screen.getByLabelText(label)),
+      ...['Cancel', 'Submit'].map(button => screen.getByText(button)),
     ];
 
-    elements.forEach((element) => {
+    elements.forEach(element => {
       expect(element).toBeInTheDocument();
     });
   });
@@ -30,7 +36,7 @@ describe('Cars Form', () => {
       await act(async () => {
         userEvent.type(screen.getByLabelText('Model'), 'Viper GTS');
         userEvent.type(screen.getByLabelText('License Plate'), 'AAA-0000');
-        fireEvent.change(screen.getByLabelText('Color'), { target: { value: '#aaaaaa' }});
+        fireEvent.change(screen.getByLabelText('Color'), { target: { value: '#aaaaaa' } });
       });
 
       await act(async () => {
@@ -54,7 +60,7 @@ describe('Cars Form', () => {
       await act(async () => {
         userEvent.type(screen.getByLabelText('Model'), 'A');
         userEvent.type(screen.getByLabelText('License Plate'), 'B');
-        fireEvent.change(screen.getByLabelText('Color'), { target: { value: '#aaaaaa' }});
+        fireEvent.change(screen.getByLabelText('Color'), { target: { value: '#aaaaaa' } });
       });
 
       await act(async () => {

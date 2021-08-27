@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Form, Modal } from "react-bootstrap"
-import { useHistory } from "react-router-dom";
-import FormControl from "components/FormControl";
-import Spot from "models/Spot";
+import React, { useState } from 'react';
+import { Form, Modal } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import FormControl from 'components/FormControl';
+import Spot from 'models/Spot';
 import EMPTY_SPOT from './constants/emptySpot';
-import { save } from "services/SpotsService";
-import SubmitFormSet from "components/SubmitFormSet";
+import { save } from 'services/SpotsService';
+import SubmitFormSet from 'components/SubmitFormSet';
 
 const SpotsForm = () => {
   const history = useHistory();
@@ -15,19 +15,21 @@ const SpotsForm = () => {
 
   const setLabel = (label: string) => setSpot({ ...spot, label });
   const onHide = () => history.goBack();
-  const onFill = () => { if (!isDirty) setIsDirty(true); };
-  
+  const onFill = () => {
+    if (!isDirty) setIsDirty(true);
+  };
+
   const onLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLabel(e.currentTarget.value);
-  }
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     save(spot);
     setSpot(EMPTY_SPOT);
     onHide();
-  }
-  
+  };
+
   return (
     <Modal show={true} size='lg' animation={false} onHide={onHide} centered>
       <Form onSubmit={onSubmit} method='POST'>
@@ -54,6 +56,6 @@ const SpotsForm = () => {
       </Form>
     </Modal>
   );
-}
+};
 
 export default SpotsForm;

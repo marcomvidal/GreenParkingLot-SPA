@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import Dot from "../Dot";
+import { render, screen } from '@testing-library/react';
+import Dot from '../Dot';
 
 describe('Dot', () => {
   it('should be properly rendered when default', () => {

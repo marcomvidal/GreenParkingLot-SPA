@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
-import SpotsForm from "../SpotsForm";
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import SpotsForm from '../SpotsForm';
 import { save } from 'services/SpotsService';
 
 jest.mock('services/SpotsService');
@@ -11,7 +11,11 @@ const history = createMemoryHistory({ initialEntries: ['/spots', '/spots/create'
 
 describe('Spots Form', () => {
   beforeEach(() => {
-    render(<Router history={history}><SpotsForm /></Router>);
+    render(
+      <Router history={history}>
+        <SpotsForm />
+      </Router>,
+    );
   });
 
   it('should render the form correctly', () => {
@@ -22,7 +26,7 @@ describe('Spots Form', () => {
       screen.getByText('Cancel'),
     ];
 
-    elements.forEach((element) => expect(element).toBeInTheDocument());
+    elements.forEach(element => expect(element).toBeInTheDocument());
   });
 
   describe('when form is correctly filled', () => {

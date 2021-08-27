@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import Home from "../Home";
+import { render, screen } from '@testing-library/react';
+import Home from '../Home';
 
 describe('Carousel Wrapper', () => {
   it('should render all carousel items', () => {
@@ -11,6 +11,6 @@ describe('Carousel Wrapper', () => {
       screen.getByText('Are you in a busy day?'),
     ];
 
-    elements.forEach((element) => expect(element).toBeInTheDocument());
+    elements.forEach(element => expect(element).toBeInTheDocument());
   });
 });

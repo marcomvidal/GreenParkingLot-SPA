@@ -1,11 +1,11 @@
-import { Switch, Route } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import NavigationBar from "./components/NavigationBar";
-import Home from "../Home";
-import SpotsIndex from "../SpotsIndex";
-import CarsIndex from "pages/CarsIndex/CarsIndex";
-import LINKS from "./data/links";
-import Login from "pages/LoginForm";
+import { Switch, Route } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import NavigationBar from './components/NavigationBar';
+import Home from '../Home';
+import SpotsIndex from '../SpotsIndex';
+import CarsIndex from 'pages/CarsIndex/CarsIndex';
+import LINKS from './data/links';
+import Login from 'pages/LoginForm';
 
 const Base = () => (
   <>

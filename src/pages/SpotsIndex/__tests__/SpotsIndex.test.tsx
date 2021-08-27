@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react";
-import { Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
-import userEvent from "@testing-library/user-event";
-import SpotsIndex from "../SpotsIndex";
-import Spot from "models/Spot";
+import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import userEvent from '@testing-library/user-event';
+import SpotsIndex from '../SpotsIndex';
+import Spot from 'models/Spot';
 import { getAll } from 'services/SpotsService';
 
 jest.mock('services/SpotsService');
@@ -32,17 +32,17 @@ describe('Spots Index', () => {
   describe('when spots are registered', () => {
     beforeEach(() => {
       (getAll as jest.Mock).mockImplementation(() => mockedSpots);
-      render(<Router history={history}><SpotsIndex /></Router>);
+      render(
+        <Router history={history}>
+          <SpotsIndex />
+        </Router>,
+      );
     });
 
     it('should render all spots information', () => {
-      const elements = [
-        screen.getByText('A'),
-        screen.getByText('B'),
-        screen.getByText('C'),
-      ];
-    
-      elements.forEach((element) => expect(element).toBeInTheDocument());
+      const elements = [screen.getByText('A'), screen.getByText('B'), screen.getByText('C')];
+
+      elements.forEach(element => expect(element).toBeInTheDocument());
     });
 
     it('should render all cars', () => {
@@ -51,8 +51,8 @@ describe('Spots Index', () => {
         screen.getByText('NSX Type S'),
         screen.getByText('This spot is empty.'),
       ];
-    
-      elements.forEach((element) => expect(element).toBeInTheDocument());
+
+      elements.forEach(element => expect(element).toBeInTheDocument());
     });
 
     it('should render all buttons', () => {
@@ -72,12 +72,16 @@ describe('Spots Index', () => {
   describe('when there are no spots registered', () => {
     beforeEach(() => {
       (getAll as jest.Mock).mockImplementation(() => []);
-      render(<Router history={history}><SpotsIndex /></Router>);
+      render(
+        <Router history={history}>
+          <SpotsIndex />
+        </Router>,
+      );
     });
 
     it('should render properly', () => {
       const element = screen.getByText('No spots registered yet.');
-    
+
       expect(element).toBeInTheDocument();
     });
 

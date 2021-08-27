@@ -1,23 +1,26 @@
-import { Button, Form, Modal } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import CheckIn from "models/CheckIn";
-import SubmitFormSet from "components/SubmitFormSet";
+import { Button, Form, Modal } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import CheckIn from 'models/CheckIn';
+import SubmitFormSet from 'components/SubmitFormSet';
 
 const CheckInForm = () => {
   const history = useHistory();
 
-  const { handleSubmit, formState: { isValid } } = useForm<CheckIn>({
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<CheckIn>({
     defaultValues: { carId: 1, spotId: 1, startTime: new Date() } as CheckIn,
     mode: 'onChange',
   });
 
   const onSubmit = (data: any) => {
     console.log(data);
-  }
+  };
 
   const onHide = () => history.goBack();
-  
+
   return (
     <Modal show={true} size='lg' animation={false} onHide={onHide} centered>
       <Form onSubmit={handleSubmit(onSubmit)} method='POST'>
@@ -40,6 +43,6 @@ const CheckInForm = () => {
       </Form>
     </Modal>
   );
-}
+};
 
 export default CheckInForm;

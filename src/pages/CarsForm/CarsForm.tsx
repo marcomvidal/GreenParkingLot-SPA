@@ -1,20 +1,20 @@
-import { useForm } from "react-hook-form";
-import { useHistory, useParams } from "react-router-dom";
-import { Form, Modal } from "react-bootstrap";
-import { SchemaOf, object, string, number } from "yup";
+import { useForm } from 'react-hook-form';
+import { useHistory, useParams } from 'react-router-dom';
+import { Form, Modal } from 'react-bootstrap';
+import { SchemaOf, object, string, number } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Car from "models/Car";
-import CARS from "pages/CarsIndex/constants/cars";
-import EMPTY_CAR from "./constants/emptyCar";
-import { CarsFormParams } from "./types";
-import { save } from "services/CarsService";
-import FormField from "components/FormField";
-import SubmitFormSet from "components/SubmitFormSet";
+import Car from 'models/Car';
+import CARS from 'pages/CarsIndex/constants/cars';
+import EMPTY_CAR from './constants/emptyCar';
+import { CarsFormParams } from './types';
+import { save } from 'services/CarsService';
+import FormField from 'components/FormField';
+import SubmitFormSet from 'components/SubmitFormSet';
 
 const CarsForm = () => {
   const { id } = useParams<CarsFormParams>();
   const history = useHistory();
-  const car = CARS[(Number(id) - 1)] ?? EMPTY_CAR;
+  const car = CARS[Number(id) - 1] ?? EMPTY_CAR;
 
   const schema: SchemaOf<Car> = object({
     id: number().notRequired(),
@@ -23,7 +23,11 @@ const CarsForm = () => {
     color: string().label('Color').required(),
   }).defined();
 
-  const { handleSubmit, register, formState: { errors, isValid } } = useForm<Car>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isValid },
+  } = useForm<Car>({
     defaultValues: car,
     resolver: yupResolver(schema),
     mode: 'onChange',
@@ -32,7 +36,7 @@ const CarsForm = () => {
   const onSubmit = (data: Car) => {
     save(data);
     onHide();
-  }
+  };
 
   const onHide = () => history.goBack();
 
@@ -45,12 +49,7 @@ const CarsForm = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FormField
-            id='model'
-            label='Model'
-            errors={errors.model}
-            {...register('model')}
-          />
+          <FormField id='model' label='Model' errors={errors.model} {...register('model')} />
           <FormField
             id='licensePlate'
             label='License Plate'
@@ -69,6 +68,6 @@ const CarsForm = () => {
       </Form>
     </Modal>
   );
-}
+};
 
 export default CarsForm;

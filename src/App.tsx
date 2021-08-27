@@ -4,13 +4,14 @@ import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import store from 'store';
 
-export const APP_NAME='Green Parking Lot'
+export const APP_NAME = 'Green Parking Lot';
 
-const App = () =>
+const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Base />
     </BrowserRouter>
-  </Provider>;
+  </Provider>
+);
 
 export default App;

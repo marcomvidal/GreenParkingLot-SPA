@@ -1,6 +1,6 @@
-import { Button, Card } from "react-bootstrap";
-import { CarSpotButton, CarSpotProps } from "../types";
-import CarOverview from "./CarOverview";
+import { Button, Card } from 'react-bootstrap';
+import { CarSpotButton, CarSpotProps } from '../types';
+import CarOverview from './CarOverview';
 
 const CarSpot = ({ spot, onSpotClick }: CarSpotProps) => {
   const buttonProps: CarSpotButton = spot.car
@@ -16,8 +16,9 @@ const CarSpot = ({ spot, onSpotClick }: CarSpotProps) => {
         <Button
           variant={buttonProps.variant}
           className='btn-block mt-auto'
-          onClick={() => onSpotClick(spot, buttonProps.url)}>
-          { buttonProps.label }
+          onClick={() => onSpotClick(spot, buttonProps.url)}
+        >
+          {buttonProps.label}
         </Button>
       </Card.Body>
     </Card>

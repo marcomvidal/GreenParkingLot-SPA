@@ -1,9 +1,9 @@
-import { InputGroup } from "react-bootstrap";
-import FormControl from "components/FormControl";
-import { SearchBarProps } from "./types";
+import { InputGroup } from 'react-bootstrap';
+import FormControl from 'components/FormControl';
+import { SearchBarProps } from './types';
 
 const SearchBar = ({ placeholder, onChange }: SearchBarProps) => (
-  <InputGroup className="my-3">
+  <InputGroup className='my-3'>
     <FormControl
       placeholder={placeholder}
       aria-label={placeholder}
