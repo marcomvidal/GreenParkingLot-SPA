@@ -5,11 +5,18 @@ import { APP_NAME } from "App";
 import Base from "../Base";
 import userEvent from "@testing-library/user-event";
 import LINKS from "../data/links";
+import { Provider } from "react-redux";
+import store from "store";
 
 describe('Base', () => {
   const history = createMemoryHistory();
 
-  beforeEach(() => render(<Router history={history}><Base /></Router>));
+  beforeEach(() => render(
+    <Provider store={store}>
+      <Router history={history}><Base /></Router>
+    </Provider>
+    )
+  );
 
   it('should render structure elements', () => {
     const title = screen.getByText(APP_NAME);

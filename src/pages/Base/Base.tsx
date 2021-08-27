@@ -5,6 +5,7 @@ import Home from "../Home";
 import SpotsIndex from "../SpotsIndex";
 import CarsIndex from "pages/CarsIndex/CarsIndex";
 import LINKS from "./data/links";
+import Login from "pages/LoginForm";
 
 const Base = () => (
   <>
@@ -13,6 +14,9 @@ const Base = () => (
       <Switch>
         <Route exact path='/'>
           <Home />
+        </Route>
+        <Route path='/login'>
+          <Login />
         </Route>
         <Route path='/spots'>
           <SpotsIndex />
