@@ -32,7 +32,7 @@ const CarsIndex = () => {
         <DropdownItem onClick={onCreateCar}>Add car</DropdownItem>
       </ActionBar>
 
-      {cars && cars.length > 0
+      {cars.length > 0
         ?
         <CarsTable cars={filteredCars} />
         :
