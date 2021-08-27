@@ -43,7 +43,7 @@ const SpotsIndex = () => {
         <DropdownItem onClick={onCreateSpot}>Add spot</DropdownItem>
       </ActionBar>
 
-      {spots && spots.length > 0
+      {spots.length > 0
         ?
         <Row xs={1} md={2} lg={3}>
           {filteredSpots.map((spot: Spot) => 

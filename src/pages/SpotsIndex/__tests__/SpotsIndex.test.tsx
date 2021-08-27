@@ -63,7 +63,7 @@ describe('Spots Index', () => {
 
     it('should open form to add a new spot by menu', () => {
       userEvent.click(screen.getByText('Actions'));
-      userEvent.click(screen.getByText('Add Spot'));
+      userEvent.click(screen.getByText('Add spot'));
 
       expect(history.location.pathname).toBe('/spots/create');
     });
