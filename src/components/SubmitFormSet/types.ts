@@ -1,6 +1,6 @@
 type SubmitFormSetProps = {
   onCancelClick: () => void;
-  isValid: boolean;
+  isSubmitDisabled: boolean;
 };
 
 export type { SubmitFormSetProps };

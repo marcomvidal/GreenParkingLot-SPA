@@ -39,7 +39,7 @@ const CheckInForm = () => {
             <Form.Label htmlFor='startTime'>Start time</Form.Label>
           </Form.Group>
         </Modal.Body>
-        <SubmitFormSet onCancelClick={onHide} isValid={isValid} />
+        <SubmitFormSet onCancelClick={onHide} isSubmitDisabled={!isValid} />
       </Form>
     </Modal>
   );

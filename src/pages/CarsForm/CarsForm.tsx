@@ -64,7 +64,7 @@ const CarsForm = () => {
             {...register('color')}
           />
         </Modal.Body>
-        <SubmitFormSet onCancelClick={onHide} isValid={isValid} />
+        <SubmitFormSet onCancelClick={onHide} isSubmitDisabled={!isValid} />
       </Form>
     </Modal>
   );

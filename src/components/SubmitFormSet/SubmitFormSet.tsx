@@ -1,14 +1,13 @@
+import SaveButton from 'components/SaveButton';
 import { Button, Modal } from 'react-bootstrap';
 import { SubmitFormSetProps } from './types';
 
-const SubmitFormSet = ({ onCancelClick, isValid }: SubmitFormSetProps) => (
+const SubmitFormSet = ({ onCancelClick, isSubmitDisabled }: SubmitFormSetProps) => (
   <Modal.Footer>
     <Button variant='outline-secondary' onClick={onCancelClick}>
       Cancel
     </Button>
-    <Button variant='success' type='submit' disabled={!isValid}>
-      Submit
-    </Button>
+    <SaveButton isDisabled={isSubmitDisabled} />
   </Modal.Footer>
 );
 

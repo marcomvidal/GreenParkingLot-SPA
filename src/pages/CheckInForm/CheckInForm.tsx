@@ -46,7 +46,7 @@ const CheckInForm = ({ spot }: CheckInFormProps) => {
               {...register('startTime')}
             />
           </Modal.Body>
-          <SubmitFormSet onCancelClick={onHide} isValid={isValid} />
+          <SubmitFormSet onCancelClick={onHide} isSubmitDisabled={!isValid} />
         </Form>
       </FormProvider>
     </Modal>
