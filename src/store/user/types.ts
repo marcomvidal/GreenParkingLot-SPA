@@ -1,10 +1,5 @@
+import User from 'models/User';
 import { Action } from 'store/types';
-
-type User = {
-  isLoggedIn: boolean;
-  name: string;
-  email: string;
-};
 
 type UserPayload = {
   user: Partial<User>;

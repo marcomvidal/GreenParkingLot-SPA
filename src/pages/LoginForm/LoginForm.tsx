@@ -8,6 +8,7 @@ import { signIn } from 'services/UsersService';
 import { object, string, SchemaOf } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import EMPTY_LOGIN from './constants/emptyLogin';
+import AppBrand from 'components/AppBrand';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const LoginForm = () => {
       <Col md={6} className='mx-auto'>
         <Card>
           <Card.Body>
+            <AppBrand />
             <h2 className='mb-5'>Sign in</h2>
             <Form onSubmit={handleSubmit(onSubmit)} method='POST'>
               <FormField

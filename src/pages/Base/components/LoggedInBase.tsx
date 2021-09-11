@@ -5,7 +5,7 @@ import NavigationBar from './NavigationBar';
 import Home from 'pages/Home';
 import SpotsIndex from 'pages/SpotsIndex';
 import CarsIndex from 'pages/CarsIndex';
-import Login from 'pages/LoginForm';
+import Configurations from 'pages/Configurations';
 
 const LoggedInBase = () => (
   <>
@@ -15,14 +15,14 @@ const LoggedInBase = () => (
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/login'>
-          <Login />
+        <Route path='/cars'>
+          <CarsIndex />
+        </Route>
+        <Route path='/configurations'>
+          <Configurations />
         </Route>
         <Route path='/spots'>
           <SpotsIndex />
-        </Route>
-        <Route path='/cars'>
-          <CarsIndex />
         </Route>
       </Switch>
     </Container>
