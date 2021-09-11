@@ -5,7 +5,7 @@ import NavigationBar from './NavigationBar';
 import Home from 'pages/Home';
 import SpotsIndex from 'pages/SpotsIndex';
 import CarsIndex from 'pages/CarsIndex';
-import Configurations from 'pages/Configurations';
+import ConfigurationsForm from 'pages/ConfigurationsForm';
 
 const LoggedInBase = () => (
   <>
@@ -19,7 +19,7 @@ const LoggedInBase = () => (
           <CarsIndex />
         </Route>
         <Route path='/configurations'>
-          <Configurations />
+          <ConfigurationsForm />
         </Route>
         <Route path='/spots'>
           <SpotsIndex />

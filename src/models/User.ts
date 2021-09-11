@@ -1,7 +1,7 @@
-type User = {
+import Configuration from './Configuration';
+
+type User = Omit<Configuration, 'password'> & {
   isLoggedIn: boolean;
-  name: string;
-  email: string;
 };
 
 export default User;
