@@ -1,12 +1,13 @@
-import { Action } from "store/types";
+import { Action } from 'store/types';
 
 type User = {
-  username: string;
-  isloggedIn: boolean;
+  isLoggedIn: boolean;
+  name: string;
+  email: string;
 };
 
 type UserPayload = {
-  username: string;
+  user: Partial<User>;
 };
 
 type UserAction = Action & {

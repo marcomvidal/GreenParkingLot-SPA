@@ -1,12 +1,12 @@
-import { UserActions } from "./actions";
-import { User, UserAction } from "./types";
+import { UserActions } from './actions';
+import { User, UserAction } from './types';
 
-const initialState: User = { username: "Guest", isloggedIn: false };
+const initialState: User = { isLoggedIn: false, email: 'guest@email.com', name: 'Guest' };
 
 const userReducer = (state: User = initialState, action: UserAction) => {
   switch (action.type) {
     case UserActions.LOGIN:
-      return { isloggedIn: true, username: action.payload?.username };
+      return { ...action.payload?.user, isLoggedIn: true } ?? state;
     case UserActions.LOGOUT:
       return initialState;
     default:

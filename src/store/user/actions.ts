@@ -1,13 +1,15 @@
-import { UserPayload } from "./types";
+import { UserPayload } from './types';
 
 enum UserActions {
-  LOGIN = "user/login",
-  LOGOUT = "user/logout",
+  LOGIN = 'user/sign-in',
+  LOGOUT = 'user/sign-out',
 }
 
-const loginAction = (payload: UserPayload) => ({
+const signInAction = (payload: UserPayload) => ({
   type: UserActions.LOGIN,
   payload,
 });
 
-export { UserActions, loginAction };
+const signOutAction = () => ({ type: UserActions.LOGOUT });
+
+export { UserActions, signInAction, signOutAction };

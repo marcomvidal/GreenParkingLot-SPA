@@ -14,16 +14,13 @@ const CheckInForm = ({ spot }: CheckInFormProps) => {
   const cars = getAll();
   const now = new Date().toISOString().substr(0, 16);
 
-  const formData = useForm<CheckIn>({
+  const form = useForm<CheckIn>({
     defaultValues: { carId: undefined, spotId: spot?.id, startTime: now },
     mode: 'onChange',
   });
 
-  const {
-    handleSubmit,
-    formState: { errors, isValid },
-    register,
-  } = formData;
+  const { handleSubmit, register, formState: { errors, isValid } } = form;
+
   const onHide = () => history.goBack();
 
   const onSubmit = (checkIn: CheckIn) => {
@@ -33,7 +30,7 @@ const CheckInForm = ({ spot }: CheckInFormProps) => {
 
   return (
     <Modal show={true} size='lg' animation={false} onHide={onHide} centered>
-      <FormProvider {...formData}>
+      <FormProvider {...form}>
         <Form onSubmit={handleSubmit(onSubmit)} method='POST'>
           <Modal.Header closeButton>
             <Modal.Title>Check in on spot {spot?.label}</Modal.Title>

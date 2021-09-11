@@ -4,7 +4,7 @@ import { createMemoryHistory } from 'history';
 import { APP_NAME } from 'App';
 import Base from '../Base';
 import userEvent from '@testing-library/user-event';
-import LINKS from '../data/links';
+import LINKS from '../constants/links';
 import { Provider } from 'react-redux';
 import store from 'store';
 
