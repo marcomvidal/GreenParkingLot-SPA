@@ -65,7 +65,7 @@ const SpotsIndex = () => {
           <CheckInForm spot={currentSpot} />
         </Route>
         <Route path='/spots/:id/check-out'>
-          <CheckOutForm />
+          <CheckOutForm spot={currentSpot} />
         </Route>
       </Switch>
     </>
