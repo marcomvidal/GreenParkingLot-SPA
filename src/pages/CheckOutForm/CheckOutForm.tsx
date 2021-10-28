@@ -1,19 +1,28 @@
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Col, Form, Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { DateTime } from 'luxon';
 import CheckIn from 'models/CheckIn';
 import SubmitFormSet from 'components/SubmitFormSet';
 import { CheckOutFormProps } from './types';
+import { elapsedTimeCalculation, priceCalculation } from './utils/calculations';
 import CarOverview from 'pages/SpotsIndex/components/CarOverview';
+import { getBySpotId } from 'services/CheckInService';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/types';
 
-const CheckInForm = ({ spot }: CheckOutFormProps) => {
+const CheckOutForm = ({ spot }: CheckOutFormProps) => {
   const history = useHistory();
+  const { baseTax } = useSelector((state: RootState) => state.user);
+  const startTime = getBySpotId(spot?.id!)?.startTime;
+  const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  const elapsedTime = elapsedTimeCalculation(startTime!);
 
   const {
     handleSubmit,
     formState: { isValid },
   } = useForm<CheckIn>({
-    defaultValues: { carId: 1, spotId: 1, startTime: new Date() } as CheckIn,
+    defaultValues: { carId: 1, spotId: 1, startTime: DateTime.now().toJSDate() } as CheckIn,
     mode: 'onChange',
   });
 
@@ -30,9 +39,27 @@ const CheckInForm = ({ spot }: CheckOutFormProps) => {
           <Modal.Title>Check out from spot {spot?.label}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CarOverview car={spot?.car} />
-          <h5>Start at: DATE</h5>
-          <h5>Total: R$ XX</h5>
+          <div className='h-100 d-flex align-items-center'>
+            <Col>
+              <CarOverview car={spot?.car} />
+            </Col>
+            <Col>
+              <ul>
+                <li>
+                  <strong>Started at:</strong> {startTime?.toLocaleString()}
+                </li>
+                <li>
+                  <strong>Price / hour:</strong> {currency.format(baseTax)}
+                </li>
+                <li>
+                  <strong>Time elapsed:</strong> {elapsedTime.toFormat('hh:mm')}
+                </li>
+                <li>
+                  <strong>Total:</strong> {currency.format(priceCalculation(baseTax, elapsedTime))}
+                </li>
+              </ul>
+            </Col>
+          </div>
         </Modal.Body>
         <SubmitFormSet onCancelClick={onHide} isSubmitDisabled={!isValid} />
       </Form>
@@ -40,4 +67,4 @@ const CheckInForm = ({ spot }: CheckOutFormProps) => {
   );
 };
 
-export default CheckInForm;
+export default CheckOutForm;

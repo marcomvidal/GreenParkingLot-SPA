@@ -1,4 +1,5 @@
 type CheckIn = {
+  id?: number;
   carId?: number;
   spotId: number;
   startTime: Date;
