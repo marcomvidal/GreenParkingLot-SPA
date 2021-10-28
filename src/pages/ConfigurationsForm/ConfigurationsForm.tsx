@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RootState } from "store/types";
-import { Alert, Card, Form, FormControl, InputGroup } from "react-bootstrap";
+import { Alert, Card, Form } from "react-bootstrap";
 import { number, object, SchemaOf, string } from "yup";
 import Configuration from "models/Configuration";
 import FormField from "components/FormField";
