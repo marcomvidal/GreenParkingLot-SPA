@@ -2,7 +2,7 @@ type CheckIn = {
   id?: number;
   carId?: number;
   spotId: number;
-  startTime: Date;
+  startTime: string;
 };
 
 export default CheckIn;

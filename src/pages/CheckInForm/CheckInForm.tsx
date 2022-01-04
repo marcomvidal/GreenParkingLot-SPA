@@ -24,6 +24,7 @@ const CheckInForm = ({ spot }: CheckInFormProps) => {
   const onHide = () => history.goBack();
 
   const onSubmit = (checkIn: CheckIn) => {
+    console.log(checkIn);
     save(checkIn);
     onHide();
   };

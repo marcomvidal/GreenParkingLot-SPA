@@ -1,6 +1,7 @@
 import { Col, Form, Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { DateTime } from 'luxon';
 import CheckIn from 'models/CheckIn';
 import SubmitFormSet from 'components/SubmitFormSet';
@@ -8,13 +9,13 @@ import { CheckOutFormProps } from './types';
 import { elapsedTimeCalculation, priceCalculation } from './utils/calculations';
 import CarOverview from 'pages/SpotsIndex/components/CarOverview';
 import { getBySpotId } from 'services/CheckInService';
-import { useSelector } from 'react-redux';
 import { RootState } from 'store/types';
+import { save } from 'services/CheckOutService';
 
 const CheckOutForm = ({ spot }: CheckOutFormProps) => {
   const history = useHistory();
   const { baseTax } = useSelector((state: RootState) => state.user);
-  const startTime = getBySpotId(spot?.id!)?.startTime;
+  const startTime = DateTime.fromISO(getBySpotId(spot?.id!)?.startTime!);
   const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   const elapsedTime = elapsedTimeCalculation(startTime!);
 
@@ -22,12 +23,17 @@ const CheckOutForm = ({ spot }: CheckOutFormProps) => {
     handleSubmit,
     formState: { isValid },
   } = useForm<CheckIn>({
-    defaultValues: { carId: 1, spotId: 1, startTime: DateTime.now().toJSDate() } as CheckIn,
+    defaultValues: { carId: 1, spotId: 1, startTime: DateTime.now().toISO() } as CheckIn,
     mode: 'onChange',
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = () => {
+    if (spot?.id) {
+      console.log(spot?.id);
+      save(spot?.id);
+    }
+    
+    onHide();
   };
 
   const onHide = () => history.goBack();
@@ -43,25 +49,25 @@ const CheckOutForm = ({ spot }: CheckOutFormProps) => {
             <Col>
               <CarOverview car={spot?.car} />
             </Col>
-            <Col>
-              <ul>
-                <li>
-                  <strong>Started at:</strong> {startTime?.toLocaleString()}
-                </li>
-                <li>
-                  <strong>Price / hour:</strong> {currency.format(baseTax)}
-                </li>
-                <li>
-                  <strong>Time elapsed:</strong> {elapsedTime.toFormat('hh:mm')}
-                </li>
-                <li>
-                  <strong>Total:</strong> {currency.format(priceCalculation(baseTax, elapsedTime))}
-                </li>
-              </ul>
+            <Col className='text-center'>
+              <div>
+                <h4>{currency.format(baseTax)} x {elapsedTime.toFormat('hh:mm')} hours</h4>
+              </div>
+              <div className='text-muted'>
+                Started at {startTime.toLocaleString(DateTime.DATETIME_MED)}
+              </div>
+            </Col>
+            <Col className='text-center'>
+              <div>
+                <strong>Total:</strong>
+              </div>
+              <div>
+                <h1>{currency.format(priceCalculation(baseTax, elapsedTime))}</h1>
+              </div>
             </Col>
           </div>
         </Modal.Body>
-        <SubmitFormSet onCancelClick={onHide} isSubmitDisabled={!isValid} />
+        <SubmitFormSet submitButtonText='Check out' onCancelClick={onHide} isSubmitDisabled={!isValid} />
       </Form>
     </Modal>
   );
