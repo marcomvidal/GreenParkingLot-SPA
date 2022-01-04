@@ -17,7 +17,7 @@ const CarsTable = ({ cars }: CarsTableProps) => {
           ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody role='button'>
         {cars.map((car, key) => (
           <tr key={key} onClick={() => onClickAtCar(car.id)}>
             <td>

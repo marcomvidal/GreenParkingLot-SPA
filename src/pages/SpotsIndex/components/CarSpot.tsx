@@ -11,7 +11,10 @@ const CarSpot = ({ spot, onSpotClick }: CarSpotProps) => {
     <Card className='h-100'>
       <Card.Body className='d-flex flex-column'>
         <h1 className='text-center'>{spot.label}</h1>
-        <CarOverview car={spot.car} />
+        
+        <div className='mb-3'>
+          <CarOverview car={spot.car} />
+        </div>
 
         <Button
           variant={buttonProps.variant}

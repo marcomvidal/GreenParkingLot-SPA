@@ -9,7 +9,7 @@ const CarOverview = ({ car }: CarOverviewProps) => (
         <h5>
           {car.model} <Dot bg={car.color} data-testid='color-dot' />
         </h5>
-        <Card.Subtitle className='mb-3 text-muted'>{car.licensePlate}</Card.Subtitle>
+        <Card.Subtitle className='text-muted'>{car.licensePlate}</Card.Subtitle>
       </>
     ) : (
       <Card.Text className='text-center'>This spot is empty.</Card.Text>
